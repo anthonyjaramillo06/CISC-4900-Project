@@ -1,0 +1,21 @@
+# Data files
+data/raw/*
+data/processed/*
+data/*.csv
+
+# Keep the folders
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# macOS
+.DS_Store
+
+data/*.txt

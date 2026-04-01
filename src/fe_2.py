@@ -50,7 +50,12 @@ model_df = home_df.merge(away_df, on='game_id', how='inner')
 TEAM_MAP_SCHED = {'OAK': 'LV', 'STL': 'LA', 'SD': 'LAC'}
 schedules['home_team'] = schedules['home_team'].replace(TEAM_MAP_SCHED)
 schedules['away_team'] = schedules['away_team'].replace(TEAM_MAP_SCHED)
-schedules['covered']   = ((schedules['result'] + schedules['spread_line']) > 0).astype(int)
+
+# Remove pushes
+schedules = schedules[schedules['result'] != schedules['spread_line']].copy()
+
+# covered = 1: away team covered the spread
+schedules['covered'] = (schedules['result'] < schedules['spread_line']).astype(int)
 
 model_df = model_df.merge(
     schedules[[
